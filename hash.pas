@@ -1,4 +1,4 @@
-unit uHashTable;
+﻿unit hash;
 
 interface
 
@@ -12,17 +12,17 @@ type
     Key: string;
   end;
 
-// класс создающий хеш-таблицу с закрытой адресацией
+// hash table with closed addressing
   THashTable = class
   private
-    // массив содержащий простые числа False - простые числа
+    // array with simple numbers
     FSimpleNumbers: TBits;
     FList: TList;
     FCount: Integer;
-    // получаем простые числа через решешо эстрагена
+    // calc simple numbers
     procedure CalcByEstrogen(Size: Integer);
     procedure DeleteList;
-    // получаем блилайшее большее простое число к искомому
+    // get nearest simple number
     function GetNearestSimple(Index: Integer): Integer;
     function GetCount: Integer;
   protected
@@ -204,11 +204,11 @@ end;
 
 function THashTable.Init(Size: Integer): Boolean;
 begin
-  // рассчитываем простые числа из пропопорции 1.5 к размеру массива
+  // calc simple numbers
   CalcByEstrogen(Trunc(Size*1.5));
   FCount := GetNearestSimple(Size);
   Result := FCount > -1;
-  // если получили размер хеш-таблицы, то считаем что инициализация прошла успешно
+
   if FCount > -1 then
   begin
     FList.Count := FCount;
